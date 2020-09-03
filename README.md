@@ -15,7 +15,7 @@ La piattaforma si articola nelle seguenti componenti che sono state progettate p
 
 ### Collaborazione tra sistemi
 
-<a href="url"><img src="/img/collaborazione-tra-sistemi.png" align="left" height="500"></a>
+<img src="/img/collaborazione-tra-sistemi.png" height="500">
 
 ### Notify
 
