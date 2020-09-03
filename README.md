@@ -42,21 +42,7 @@ E' costituito da un database MYSQL che memorizza i messaggi e da un applicativo 
 La parte applicativa può essere configurata per tracciare su un topic del Message Broker eventi relativi alle attività del sistema (*events*) e, indipendentemente, le attività dell'utente (*audit*).
 Il sistema è popolato dal corrispondente consumatore che scoda i messaggi presenti sul Message Broker. L'utente può eseguire un determinato set di tipi di ricerche ed impostare la data in cui è stato letto ogni messaggio.
 
-```mermaid
-graph LR
-Client[client]== rest ==>MessageStore
-Backend[produttore di messaggi]-- rest -->MessageBroker
-
-subgraph message store
-MessageStore["message store API (nodejs)"]==db protocol==>database["message store database (PostgreSQL)"]
-MessageStore-.rest.->MessageBroker["message broker"]
-MessageStoreConsumer["message store consumer (nodejs)"]--db protocol-->database
-MessageBroker["message broker"]--rest-->MessageStoreConsumer
-MessageBroker-- rest -->events
-MessageBroker-- rest -->audit
-end
-```
-
+<img src="/img/message-store.png" height="250">
 
 ### Events  Consumer
 Questo modulo ha il compito di tracciare le attività dei componenti del sistema. E' costituito da un database PostgreSQL che contiene i record corrispondenti alle attività del componente (ad esempio: "letto messaggio dal topic", "errore di accesso al database", "messaggio correttamente inoltrato", ...) e da un consumer che si occupa di inserire sul database le informazioni dedotte dagli eventi generati dai vari componenti.
