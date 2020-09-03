@@ -14,24 +14,8 @@ La piattaforma si articola nelle seguenti componenti che sono state progettate p
 ## Disegno architetturale
 
 ### Collaborazione tra sistemi
-```mermaid
-graph LR
-subgraph NOTIFY
-notify[Message Broker]
-Preferences
-MessageStore[Message Store]
-end
-notify-->SMSGateway[sms gateway]
-notify-->MailFarm[mail farm]
-notify-->Firebase[firebase]
-notify-->ioitalia[IO Italia]
-Client1[client produttore di messaggi]==>notify
-subgraph client
-Client2[client gestore di preferenze]==>Preferences
-Client3[client gestore di messaggi]==>MessageStore
-end
-```
 
+<a href="url"><img src="/img/collaborazione-tra-sistemi.png" align="left" height="500"></a>
 
 ### Notify
 
