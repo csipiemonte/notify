@@ -19,31 +19,7 @@ La piattaforma si articola nelle seguenti componenti che sono state progettate p
 
 ### Notify
 
-```mermaid
-graph LR
-    subgraph NOTIFY
-MessageBroker[message broker]-->SMSConsumer[sms consumer]
-MessageBroker-->EmailConsumer[email consumer]
-MessageBroker-->PushConsumer[push consumer]
-MessageBroker-->ioitaliaConsumer[IO Italia consumer]
-MessageBroker-->MessageStoreConsumer[message store consumer]
-MessageBroker-->EventConsumer[event consumer]
-MessageBroker-->AuditConsumer[audit consumer]
-Preferences[preferences]-.->MessageBroker
-MessageStore[message store]-.->MessageBroker
-end
-subgraph client
-Client1[gestore di preferenze]==>Preferences
-Client2[gestore di messaggi]==>MessageStore
-Client3[produttore di notifiche]==>MessageBroker
-end
-SMSConsumer-->SMSGateway[sms gateway]
-EmailConsumer-->MailFarm[mail farm]
-PushConsumer-->Firebase[firebase]
-ioitaliaConsumer-->IOItalia[IO Italia]
-
-
-```
+<img src="/img/notify.png" height="500">
 
 ### Message Broker
 Il Message Broker si occupa di instradare i messaggi tra i vari componenti del sistema. Implementa il pattern del Virtual Topic.
