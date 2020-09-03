@@ -62,14 +62,7 @@ E' il consumatore relativo agli SMS. E' collegato alla relativa coda sul Message
 ### Email Consumer
 E' il consumatore relativo alle email. E' collegato alla relativa coda sul Message Broker da cui estrae i messaggi. Per ogni messaggio, tramite le opportune API, accede al modulo delle preferenze per ottenere l'indirizzo a cui inviare l'email. Ottenuta questa informazione confeziona la chiama alla Mail Farm che si occuperà del delivery vero e proprio.
 
-```mermaid
-graph LR
-subgraph Email
-MessageBroker["message broker"]--rest -->EmailConsumer["email consumer (nodejs)"]
-end
-EmailConsumer--smtp -->MailFarm["mail farm"]
-EmailConsumer--rest -->Preferences["preferences"]
-```
+<img src="/img/email-consumer.png" height="200">
 
 ### IO Italia Consumer
 E' il consumatore relativo alla piattaforma dell'amministrazione centrale **IO Italia**. E' collegato alla relativa coda sul Message Broker da cui estrae i messaggi. Per ogni messaggio, tramite una API dedicata di IO Italia si verifica l'abilitazione concessa dall'utente (identificato con codice fiscale) per lo specifico servizio di business, se l'esito della verifica è positivo IO Italia Consumer sottomette il messaggio ad IO Italia richiamando una specifica API Rest esposta da IO Italia.
