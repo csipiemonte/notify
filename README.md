@@ -26,13 +26,7 @@ Il Message Broker si occupa di instradare i messaggi tra i vari componenti del s
 L'uso di un Message Broker consente una interazione asincrona tra il sistema e i suoi client garantendo quindi una affidabilità migliore e tempi di risposta più brevi.
 Dal punto di vista logico si è implementato il pattern del Virtual Topic. Questo consente mantenere la semantica *"ogni messaggio è consumato esattamente una volta"* indipendentemente dal numero di consumatori.
 
-```mermaid
-graph LR
-subgraph message broker
-Wrapper["wrapper (nodejs)"]-->Database["mb database (redis)"]
-end
-Client[client]-- rest -->Wrapper
-```
+<img src="/img/message-broker.png" height="150">
 
 ### Preferences
 Questo modulo si occupa di gestire i contatti digitali dei cittadini e le relative preferenze di notifica.
