@@ -34,16 +34,7 @@ E' costituito da un database PostgreSQL che memorizza i dati di business e da un
 La parte applicativa può essere configurata per tracciare su un topic del Message Broker eventi relativi alle attività del sistema (*events*) e, indipendentemente, le attività dell'utente (*audit*).
 Il database è popolato da procedure offline oppure tramite le opportune API.
 
-```mermaid
-graph LR
-subgraph preferences
-Preferences["preferences (nodejs)"]-->Database["preferences database (PostgreSQL)"]
-Preferences-.->MessageBroker["message broker"]
-end
-MessageBroker-.->Events[events]
-MessageBroker-.->Audit[audit]
-Client[client]-- rest -->Preferences
-```
+<img src="/img/preferences.png" height="250">
 
 ### Message Store
 Questo modulo si occupa di gestire messaggi degli utenti.
