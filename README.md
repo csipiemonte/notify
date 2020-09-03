@@ -67,14 +67,8 @@ E' il consumatore relativo alle email. E' collegato alla relativa coda sul Messa
 ### IO Italia Consumer
 E' il consumatore relativo alla piattaforma dell'amministrazione centrale **IO Italia**. E' collegato alla relativa coda sul Message Broker da cui estrae i messaggi. Per ogni messaggio, tramite una API dedicata di IO Italia si verifica l'abilitazione concessa dall'utente (identificato con codice fiscale) per lo specifico servizio di business, se l'esito della verifica è positivo IO Italia Consumer sottomette il messaggio ad IO Italia richiamando una specifica API Rest esposta da IO Italia.
 
-```mermaid
-graph LR
-subgraph Push
-MessageBroker["message broker"]--rest -->PushConsumer["IO Italia consumer (nodejs)"]
-end
-PushConsumer-- rest -->ioitalia-check["io italia check user"]
-PushConsumer-- rest -->ioitalia-submit["io italia submit message"]
-```
+<img src="/img/ioitalia-consumer.png" height="200">
+
 ### Push Consumer
 E' il consumatore relativo alle notifiche push. E' collegato alla relativa coda sul Message Broker da cui estrae i messaggi. Per ogni messaggio, tramite le opportune API, accede al modulo delle preferenze per ottenere i token necessari ad inviare le notifiche ai dispositivi registrati dall'utente. Ottenuta questa informazione confeziona la chiama a Firebase che si occuperà del delivery vero e proprio.
 
