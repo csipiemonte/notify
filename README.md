@@ -47,13 +47,7 @@ Il sistema è popolato dal corrispondente consumatore che scoda i messaggi prese
 ### Events  Consumer
 Questo modulo ha il compito di tracciare le attività dei componenti del sistema. E' costituito da un database PostgreSQL che contiene i record corrispondenti alle attività del componente (ad esempio: "letto messaggio dal topic", "errore di accesso al database", "messaggio correttamente inoltrato", ...) e da un consumer che si occupa di inserire sul database le informazioni dedotte dagli eventi generati dai vari componenti.
 
-```mermaid
-graph LR
-subgraph events
-MessageBroker["message broker"]-- rest -->EventConsumer["event consumer (nodejs)"]
-EventConsumer-- db protocol -->Database["events database (PostgreSQL)"]
-end
-```
+<img src="/img/events-consumer.png" height="100">
 
 ### Audit Consumer
 Questo modulo ha il compito di tracciare le attività degli utenti. E' costituito da un database PostgreSQL che contiene i record corrispondenti alle attività dell'utente (ad esempio: "invocato GET su url xyz") e da un consumer che si occupa di inserire sul database le informazioni dedotte dagli eventi generati dai vari componenti.
