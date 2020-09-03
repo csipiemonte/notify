@@ -52,13 +52,8 @@ Questo modulo ha il compito di tracciare le attività dei componenti del sistema
 ### Audit Consumer
 Questo modulo ha il compito di tracciare le attività degli utenti. E' costituito da un database PostgreSQL che contiene i record corrispondenti alle attività dell'utente (ad esempio: "invocato GET su url xyz") e da un consumer che si occupa di inserire sul database le informazioni dedotte dagli eventi generati dai vari componenti.
 
-```mermaid
-graph LR
-subgraph audit
-MessageBroker["message broker"]-- rest -->AuditConsumer["audit consumer (nodejs)"]
-AuditConsumer-- db protocol -->Database["audit database (PostgreSQL)"]
-end
-```
+<img src="/img/audit-consumer.png" height="100">
+
 ### SMS Consumer
 E' il consumatore relativo agli SMS. E' collegato alla relativa coda sul Message Broker da cui estrae i messaggi. Per ogni messaggio, tramite le opportune API, accede al modulo delle preferenze per ottenere il numero di telefono a cui inviare l'SMS. Ottenuta questa informazione confeziona la chiama all'SMS Gateway che si occuperà del delivery vero e proprio.
 
