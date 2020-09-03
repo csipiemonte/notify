@@ -57,14 +57,8 @@ Questo modulo ha il compito di tracciare le attività degli utenti. E' costituit
 ### SMS Consumer
 E' il consumatore relativo agli SMS. E' collegato alla relativa coda sul Message Broker da cui estrae i messaggi. Per ogni messaggio, tramite le opportune API, accede al modulo delle preferenze per ottenere il numero di telefono a cui inviare l'SMS. Ottenuta questa informazione confeziona la chiama all'SMS Gateway che si occuperà del delivery vero e proprio.
 
-```mermaid
-graph LR
-subgraph SMS
-MessageBroker["message broker"]--rest -->SMSConsumer["sms consumer (nodejs)"]
-end
-SMSConsumer--rest xml -->SMSGateway["sms gateway"]
-SMSConsumer--rest-->Preferences["preferences"]
-```
+<img src="/img/sms-consumer.png" height="200">
+
 ### Email Consumer
 E' il consumatore relativo alle email. E' collegato alla relativa coda sul Message Broker da cui estrae i messaggi. Per ogni messaggio, tramite le opportune API, accede al modulo delle preferenze per ottenere l'indirizzo a cui inviare l'email. Ottenuta questa informazione confeziona la chiama alla Mail Farm che si occuperà del delivery vero e proprio.
 
