@@ -72,14 +72,7 @@ E' il consumatore relativo alla piattaforma dell'amministrazione centrale **IO I
 ### Push Consumer
 E' il consumatore relativo alle notifiche push. E' collegato alla relativa coda sul Message Broker da cui estrae i messaggi. Per ogni messaggio, tramite le opportune API, accede al modulo delle preferenze per ottenere i token necessari ad inviare le notifiche ai dispositivi registrati dall'utente. Ottenuta questa informazione confeziona la chiama a Firebase che si occuperà del delivery vero e proprio.
 
-```mermaid
-graph LR
-subgraph IO Italia
-MessageBroker["message broker"]--rest -->PushConsumer["push consumer (nodejs)"]
-end
-PushConsumer-- rest -->Firebase["firebase"]
-PushConsumer-- rest -->Preferences["preferences"]
-```
+<img src="/img/push-consumer.png" height="200">
   
 ## Scelte tecnologiche
 Qui sono descritte le componenti tecnologiche scelte con le relative motivazioni. 
