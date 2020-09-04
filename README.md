@@ -671,9 +671,9 @@ Il valore 1 sulla canalità (sms_result , io_result,....) indica che il messaggi
 
 Viene utilizzata la metodologia Semantic Versioning (http://semver.org).
 
-## Authors  
-  
-* CSI Piemonte  
+## Authors
+
+Gli autori sono indicati nei file README.md dei singoli componenti.
   
 ## License
 
