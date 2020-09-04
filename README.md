@@ -141,35 +141,7 @@ Vi è un forte requisito di rendere il sistema sicuro e di poter tracciare le op
 
 Il diagramma seguente è lo schema di deployment del sistema.
 
-```mermaid
-graph LR
-client-->apache-frontend[Front End<br><small>apache</small>]
-apache-frontend-->mb[MB<br><small>node.js</small>]
-apache-frontend-->applications[Message Store & Preferences<br><small>node.js</small>]
-consumers-delivery[sms, email, push, ioitalia<br><small>consumers</small>]-->apache-frontend
-consumers-internal[audit, events<br><small>consumers</small>]-->apache-frontend
-consumers-internal-->mysql-as-a-service[MYSQL<br><small>as a service</small>]
-applications-->mysql-as-a-service
-mb-->REDIS
-
-subgraph mb X 3
-REDIS
-sentinel-mb[redis sentinel]-.->REDIS
-mb
-end
-
-subgraph app X 3
-applications
-consumers-delivery
-consumers-internal
-sentinel-app[redis sentinel]-.->REDIS
-end
-
-subgraph apache X 3
-apache-frontend
-end
-
-```
+<img src="/img/deployment.png" height="350">
 
 # Rilascio chiavi di accesso JWT alla piattaforma
 Il sistema ha la necessità di controllare e  tracciare le attività dei client che lo usano la piattaforma di notifica. Per soddisfare questi requisiti ad ogni client è assegnato un token JWT che include le informazioni necessarie per svolgere tutte le funzioni richieste. Tale token, la cui conservazione e riservatezza sono a cura del client, è rilasciato al fruitore all'atto della sottoscrizione al servizio NOTIFY.
