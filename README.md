@@ -667,6 +667,10 @@ response:
 
 Il valore 1 sulla canalità (sms_result , io_result,....) indica che il messaggio è stato correttamente inoltrato.
 
+## Versioning
+
+Viene utilizzata la metodologia Semantic Versioning (http://semver.org).
+
 ## Authors  
   
 * CSI Piemonte  
