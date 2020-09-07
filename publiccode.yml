@@ -1,0 +1,21 @@
+# This repository adheres to the publiccode.yml standard by including this 
+# metadata file that makes public software easily discoverable.
+# More info at https://github.com/italia/publiccode.yml
+
+publiccodeYmlVersion: '0.2'
+name: Notify
+url: 'https://github.com/csipiemonte/notify'
+developmentStatus: stable
+releaseDate: '2020-09-07'
+softwareType: standalone/backend
+localisation:
+  localisationReady: false
+  availableLanguages:
+    - it
+description:
+  it:
+    genericName: Notify
+    shortDescription: "Piattaforma di notifica messaggi utente"
+    longDescription: "NOTIFY é una piattaforma di notifica messaggi utente dispiegata che abilita le comunicazioni delle pubbliche amministrazioni locali verso i cittadini (o in generale gli utenti finali del sistema PA). La piattaforma favorisce l’interazione su canalità tradizionali quali  email, sms e di nuova generazione ad esempio push-notification su Mobile  App ed il sistema [IO Italia](https://teamdigitale.github.io/digital-citizenship/introduzione.html)."
+
+
