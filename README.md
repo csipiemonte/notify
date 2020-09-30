@@ -38,7 +38,7 @@ Il database è popolato da procedure offline oppure tramite le opportune API.
 
 ### Message Store
 Questo modulo si occupa di gestire messaggi degli utenti.
-E' costituito da un database MYSQL che memorizza i messaggi e da un applicativo scritto in node.js che espone l'archivio sottoforma di API Rest. La sicurezza è gestita tramite token JWT. 
+E' costituito da un database Postgres che memorizza i messaggi e da un applicativo scritto in node.js che espone l'archivio sottoforma di API Rest. La sicurezza è gestita tramite token JWT. 
 La parte applicativa può essere configurata per tracciare su un topic del Message Broker eventi relativi alle attività del sistema (*events*) e, indipendentemente, le attività dell'utente (*audit*).
 Il sistema è popolato dal corrispondente consumatore che scoda i messaggi presenti sul Message Broker. L'utente può eseguire un determinato set di tipi di ricerche ed impostare la data in cui è stato letto ogni messaggio.
 
