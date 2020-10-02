@@ -22,4 +22,10 @@ dependsOn:
     - name: Node.js
       versionMin: 10.4.1
       versionMax: 12.18.3
-
+    - name: PostgreSQL
+      versionMin: 9.6.10
+developmentStatus: development
+legal:
+  license: EUPL-1.2
+  mainCopyrightOwner: 'CSI Piemonte'
+  repoOwner: 'CSI Piemonte'
