@@ -615,7 +615,6 @@ Si otterrà un risultato simile a questo:
 Tramite un'apposita API è possibile avere le quadrature delle notifiche inviate.
 Per poter utilizzare l'API di status dei messaggi inviati occorre avere un token abilitato alla fruizione. 
 Si può effettuare una ricerca utilizzando l'uuid del messaggio o il bulk_id.
-Le specifiche di dettaglio sono in formato YAML e sono disponibili alla url : https://gitlab.ecosis.csi.it/user-notification-platform/eventsconsumer/blob/master/messages-status.yaml
 
 Di seguito un esempio di chiamate con id e uno con bulk_id con relativa response:
 
