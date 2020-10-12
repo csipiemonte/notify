@@ -673,3 +673,9 @@ Gli autori sono indicati nei file README.md dei singoli componenti.
   
 ## License
 
+SPDX-License-Identifier: EUPL-1.2
+See the LICENSE.txt file for details
+
+## Copyrights
+
+© Copyright CSI Piemonte - 2020
