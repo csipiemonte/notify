@@ -160,9 +160,6 @@ Il token contiene le informazioni necessarie affinchè il sistema possa inviare 
 | canalità offerte  | Specificare le canalità offerte dal servizio di business: email, sms, push.<br>N.B.:<br>  Nel caso di **push** è necessario esplicitare la chiave token di FireBase legata all'applicazione web che riceve le notifiche. Da richiedere al progettista responsabile dello sviluppo del front-end.<br> Nel caso di **sms** è necessario indicare gli estremi del progetto SMS<br>  Nel caso di **email** è necessario indicare una mail mittente valida e registrata presso il proprio provider.|                                                                                                                                                                                                               |
 
 Ad ogni servizio di business è associata una chiave JWT di accesso alle API di sottomissione notifiche e le chiavi JWT dei canalità di front-end responsabili del setting delle preferenze utente e consultazione messaggi.
-
-Per il rilascio dei token di accesso contattare il referente CSI della piattaforma di notifica.
-
   
 # Getting started submit notifiche
 Il sistema di notifica si basa su un message broker che indirizza ai vari canali le notifiche.
@@ -232,7 +229,7 @@ Il sistema gestisce una semplice forma di priorità. Essa consiste dare la prece
 	  * ```payload.memo.summary```:  sommario che descrive l'evento
 	  * ```payload.memo.description```: descrizione estesa dell'evento
 	  * ```payload.memo.location```: indirizzo dell'evento
-	  * ```payload.memo.organizer```: organizzatore dell'evento (es: Torino Facile <noreply.torinofacile@csi.it>)
+	  * ```payload.memo.organizer```: organizzatore dell'evento
  * ```trusted```: se valorizzato con ```true``` (boolean) allora il sistema delle preferenze non è contattato e saranno usati i contatti digitali presenti nel messaggio. 
 
 ## Tipologie di sottomissione notifiche
@@ -284,7 +281,7 @@ https://<notify-server>/notify-mb/api/v1/topics/messages
 	        "summary": "appuntamento Anagrafe Città di Torino",
 	        "description": "Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe",
 	        "location": "Via della Consolata, 23, 10122 Torino",
-	        "organizer": "Torino Facile <noreply.torinofacile@csi.it>"
+	        "organizer": "Organizzatore Evento <noreply@evento.it>"
 	    }
 	}
 }
@@ -335,7 +332,7 @@ curl -X POST \
 					"summary": "appuntamento Anagrafe Città di Torino",
 					"description": "Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe",
 					"location": "Via della Consolata, 23, 10122 Torino",
-                    "organizer": "Torino Facile <noreply.torinofacile@csi.it>"
+                    "organizer": "Organizzatore Evento <noreply@evento.it>"
 				}
 			}
          
@@ -401,7 +398,7 @@ Si aggiunge il campo ```bulk_id ``` che identifica il gruppo di appartenenza del
 	        "summary": "appuntamento Anagrafe Città di Torino",
 	        "description": "Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe",
 	        "location": "Via della Consolata, 23, 10122 Torino",
-	        "organizer": "Torino Facile <noreply.torinofacile@csi.it>"
+	        "organizer": "Organizzatore Evento <noreply@evento.it>"
 	    }
 	}
 },
@@ -471,7 +468,7 @@ Si aggiunge il campo ```bulk_id ``` che identifica il gruppo di appartenenza del
 	        "summary": "appuntamento Anagrafe Città di Torino",
 	        "description": "Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe",
 	        "location": "Via della Consolata, 23, 10122 Torino",
-	        "organizer": "Torino Facile <noreply.torinofacile@csi.it>"
+	        "organizer": "Organizzatore Evento <noreply@evento.it>"
 	    }
 	}
 }
