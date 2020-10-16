@@ -11,6 +11,15 @@ La piattaforma si articola nelle seguenti componenti che sono state progettate p
 |-------------------------------------------------|-----------------------------------------------------------------------------------------|---------------------------------------------|
 | Motore per la gestione delle notifiche messaggi | Contatti digitali dell'utente e preferenze di notifica per singolo servizio applicativo | Archivio delle notifiche personali ricevute |
 
+Il prodotto si articola nelle seguenti componenti:
+* Audit (https://github.com/csipiemonte/notify-audit)
+* Message consumer (https://github.com/csipiemonte/notify-mexconsumer)
+* IO Italia consumer (https://github.com/csipiemonte/notify-ioconsumer)
+* Notifiche push consumer (https://github.com/csipiemonte/notify-pushconsumer)
+* Message store (https://github.com/csipiemonte/notify-messagestore)
+* Email consumer (https://github.com/csipiemonte/notify-emailconsumer)
+* Gestore delle preferenze (https://github.com/csipiemonte/notify-preferences)
+
 ## Disegno architetturale
 
 ### Collaborazione tra sistemi
