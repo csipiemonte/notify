@@ -1,6 +1,6 @@
 # Piattaforma di notifica regionale  
 NOTIFY é una piattaforma di notifica messaggi utente dispiegata che abilita le comunicazioni delle pubbliche amministrazioni locali verso i cittadini (o in generale gli utenti finali del sistema PA).
-La piattaforma favorisce l’interazione su canalità tradizionali quali email, sms e di nuova generazione ad esempio push-notification su Mobile App ed il sistema [IO Italia](https://teamdigitale.github.io/digital-citizenship/introduzione.html). 
+La piattaforma favorisce l’interazione su canalità tradizionali quali email, sms e di nuova generazione ad esempio push-notification su Mobile App ed il sistema [IO Italia](https://io.italia.it/). 
 
 ## Componenti di piattaforma
 La piattaforma si articola nelle seguenti componenti che sono state progettate per consentire un'esperienza d'uso ottimizzata per i servizi applicativi che aderiscono ad NOTIFY.
