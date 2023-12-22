@@ -13,12 +13,16 @@ La piattaforma si articola nelle seguenti componenti che sono state progettate p
 
 Il prodotto si articola nelle seguenti componenti:
 * Audit (https://github.com/csipiemonte/notify-audit)
-* Message consumer (https://github.com/csipiemonte/notify-mexconsumer)
-* IO Italia consumer (https://github.com/csipiemonte/notify-ioconsumer)
-* Notifiche push consumer (https://github.com/csipiemonte/notify-pushconsumer)
-* Message store (https://github.com/csipiemonte/notify-messagestore)
+* Commons (https://github.com/csipiemonte/notify-commons)
 * Email consumer (https://github.com/csipiemonte/notify-emailconsumer)
+* Events
+* IO Italia consumer (https://github.com/csipiemonte/notify-ioconsumer)
+* Message Broker
+* Message store (https://github.com/csipiemonte/notify-messagestore)
+* Message consumer (https://github.com/csipiemonte/notify-mexconsumer)
 * Gestore delle preferenze (https://github.com/csipiemonte/notify-preferences)
+* Notifiche push consumer (https://github.com/csipiemonte/notify-pushconsumer)
+
 
 ## Disegno architetturale
 
