@@ -15,9 +15,9 @@ Il prodotto si articola nelle seguenti componenti:
 * Audit (https://github.com/csipiemonte/notify-audit)
 * Commons (https://github.com/csipiemonte/notify-commons)
 * Email consumer (https://github.com/csipiemonte/notify-emailconsumer)
-* Events
+* Events (https://github.com/csipiemonte/notify-events)
 * IO Italia consumer (https://github.com/csipiemonte/notify-ioconsumer)
-* Message Broker
+* Message Broker (https://github.com/csipiemonte/notify-messagebroker)
 * Message store (https://github.com/csipiemonte/notify-messagestore)
 * Message consumer (https://github.com/csipiemonte/notify-mexconsumer)
 * Gestore delle preferenze (https://github.com/csipiemonte/notify-preferences)
