@@ -43,7 +43,7 @@ Dal punto di vista logico si è implementato il pattern del Virtual Topic. Quest
 
 ### Preferences
 Questo modulo si occupa di gestire i contatti digitali dei cittadini e le relative preferenze di notifica.
-E' costituito da un database PostgreSQL che memorizza i dati di business e da un applicativo scritto in node.js che espone l'archivio sottoforma di API Rest. La sicurezza è gestita tramite token JWT. 
+E' costituito da un database PostgreSQL che memorizza i dati di business e da un applicativo scritto in node.js che espone l'archivio sotto forma di API Rest. La sicurezza è gestita tramite token JWT. 
 La parte applicativa può essere configurata per tracciare su un topic del Message Broker eventi relativi alle attività del sistema (*events*) e, indipendentemente, le attività dell'utente (*audit*).
 Il database è popolato da procedure offline oppure tramite le opportune API.
 
@@ -51,51 +51,51 @@ Il database è popolato da procedure offline oppure tramite le opportune API.
 
 ### Message Store
 Questo modulo si occupa di gestire messaggi degli utenti.
-E' costituito da un database Postgres che memorizza i messaggi e da un applicativo scritto in node.js che espone l'archivio sottoforma di API Rest. La sicurezza è gestita tramite token JWT. 
+E' costituito da un database PostgreSQL che memorizza i messaggi e da un applicativo scritto in node.js che espone l'archivio sottoforma di API Rest. La sicurezza è gestita tramite token JWT. 
 La parte applicativa può essere configurata per tracciare su un topic del Message Broker eventi relativi alle attività del sistema (*events*) e, indipendentemente, le attività dell'utente (*audit*).
-Il sistema è popolato dal corrispondente consumatore che scoda i messaggi presenti sul Message Broker. L'utente può eseguire un determinato set di tipi di ricerche ed impostare la data in cui è stato letto ogni messaggio.
+Il sistema è popolato dal corrispondente componente che scoda i messaggi presenti sul Message Broker. L'utente può effettuare diversi tipi di ricerca ed impostare la data in cui è stato letto ogni messaggio.
 
 <img src="/img/message-store.png" height="250">
 
 ### Events  Consumer
-Questo modulo ha il compito di tracciare le attività dei componenti del sistema. E' costituito da un database PostgreSQL che contiene i record corrispondenti alle attività del componente (ad esempio: "letto messaggio dal topic", "errore di accesso al database", "messaggio correttamente inoltrato", ...) e da un consumer che si occupa di inserire sul database le informazioni dedotte dagli eventi generati dai vari componenti.
+Questo modulo ha il compito di tracciare le attività dei componenti del sistema. E' costituito da un database PostgreSQL che contiene i record corrispondenti alle attività del componente (ad esempio: "letto messaggio dal topic", "errore di accesso al database", "messaggio correttamente inoltrato", ...) e da un consumer che si occupa di inserire sul database gli eventi generati dai vari componenti.
 
 <img src="/img/events-consumer.png" height="100">
 
 ### Audit Consumer
-Questo modulo ha il compito di tracciare le attività degli utenti. E' costituito da un database PostgreSQL che contiene i record corrispondenti alle attività dell'utente (ad esempio: "invocato GET su url xyz") e da un consumer che si occupa di inserire sul database le informazioni dedotte dagli eventi generati dai vari componenti.
+Questo modulo ha il compito di tracciare le attività degli utenti. E' costituito da un database PostgreSQL che contiene i record corrispondenti alle attività dell'utente (ad esempio: "invocato GET su url xyz") e da un consumer che si occupa di inserire sul database le informazioni tracciate dai vari componenti.
 
 <img src="/img/audit-consumer.png" height="100">
 
 ### SMS Consumer
-E' il consumatore relativo agli SMS. E' collegato alla relativa coda sul Message Broker da cui estrae i messaggi. Per ogni messaggio, tramite le opportune API, accede al modulo delle preferenze per ottenere il numero di telefono a cui inviare l'SMS. Ottenuta questa informazione confeziona la chiama all'SMS Gateway che si occuperà del delivery vero e proprio.
+E' il consumer per le notifiche SMS. E' collegato alla relativa coda sul Message Broker da cui estrae i messaggi. Per ogni messaggio, tramite le opportune API, accede al modulo delle preferenze per ottenere il numero di telefono a cui inviare l'SMS. Ottenuta questa informazione confeziona la chiama all'SMS Gateway che si occuperà del delivery vero e proprio.
 
 <img src="/img/sms-consumer.png" height="200">
 
 ### Email Consumer
-E' il consumatore relativo alle email. E' collegato alla relativa coda sul Message Broker da cui estrae i messaggi. Per ogni messaggio, tramite le opportune API, accede al modulo delle preferenze per ottenere l'indirizzo a cui inviare l'email. Ottenuta questa informazione confeziona la chiama alla Mail Farm che si occuperà del delivery vero e proprio.
+E' il consumer per le notifiche email. E' collegato alla relativa coda sul Message Broker da cui estrae i messaggi. Per ogni messaggio, tramite le opportune API, accede al modulo delle preferenze per ottenere l'indirizzo a cui inviare l'email. Ottenuta questa informazione confeziona la chiama alla Mail Farm che si occuperà del delivery vero e proprio.
 
 <img src="/img/email-consumer.png" height="200">
 
 ### IO Italia Consumer
-E' il consumatore relativo alla piattaforma dell'amministrazione centrale **IO Italia**. E' collegato alla relativa coda sul Message Broker da cui estrae i messaggi. Per ogni messaggio, tramite una API dedicata di IO Italia si verifica l'abilitazione concessa dall'utente (identificato con codice fiscale) per lo specifico servizio di business, se l'esito della verifica è positivo IO Italia Consumer sottomette il messaggio ad IO Italia richiamando una specifica API Rest esposta da IO Italia.
+E' il consumer per le notifiche verso la piattaforma dell'amministrazione centrale **IO Italia**. E' collegato alla relativa coda sul Message Broker da cui estrae i messaggi. Per ogni messaggio, tramite una API dedicata di IO Italia, verifica l'abilitazione concessa dall'utente (identificato con codice fiscale) per lo specifico servizio di business, se l'esito della verifica è positivo il consumer sottomette il messaggio ad IO Italia richiamando una sua specifica API Rest.
 
 <img src="/img/ioitalia-consumer.png" height="200">
 
 ### Push Consumer
-E' il consumatore relativo alle notifiche push. E' collegato alla relativa coda sul Message Broker da cui estrae i messaggi. Per ogni messaggio, tramite le opportune API, accede al modulo delle preferenze per ottenere i token necessari ad inviare le notifiche ai dispositivi registrati dall'utente. Ottenuta questa informazione confeziona la chiama a Firebase che si occuperà del delivery vero e proprio.
+E' il consumer per le notifiche push. E' collegato alla relativa coda sul Message Broker da cui estrae i messaggi. Per ogni messaggio, tramite le opportune API, accede al modulo delle preferenze per ottenere i token necessari ad inviare le notifiche ai dispositivi registrati dall'utente. Ottenuta questa informazione confeziona la chiama a Firebase che si occuperà del delivery vero e proprio.
 
 <img src="/img/push-consumer.png" height="200">
   
 ## Scelte tecnologiche
 Qui sono descritte le componenti tecnologiche scelte con le relative motivazioni. 
 ### API REST
-E' necessario introdurre uno standard per far comunicare UNP con gli altri sistemi. Tale standard deve essere di semplice implementazione e ampiamente usato.
-Si è scelto API Rest in virtù delle seguenti considerazioni:
+E' necessario introdurre uno standard per far comunicare la piattaforma con gli altri sistemi. Tale standard deve essere di semplice implementazione e ampiamente usato.
+Si è scelto API REST in virtù delle seguenti considerazioni:
 * Limitato accoppiamento tra client e server rispetto a più tradizionali protocolli RPC
-* Facilità nell'estendere le API senza dover necessariamente informare i client.
+* Facilità nell'estendere le API senza dover necessariamente informare i client
 * Grande diffusione (quasi tutte le applicazioni su Internet usano questo approccio)
-* Essendo stateless è molto più semplice costruire sistemi scalabili.
+* Essendo stateless è molto più semplice costruire sistemi scalabili
 * E' nativamente supportato dai browser rendendo l'implementazione di client molto più semplice
 * E' più semplice da apprendere rispetto agli altri standard
 
@@ -112,8 +112,8 @@ La scelta di Firebase è data dalle seguenti considerazioni:
 * E' lo standard di fatto per l'invio di notifiche su piattaforme Android, IOS, e web
 * Supporta le PWA
 * Non richiede pagamento
-* E' supportato dal gestore ed è facile trovare documentazione ed esempi.
-* Le alternative non supportano la stessa varietà di device target.
+* E' supportato dal gestore ed è facile trovare documentazione ed esempi
+* Le alternative non supportano la stessa varietà di device target
 * E' una struttura distribuita e robusta che ha dimostrato di essere in grado di consegnare miliardi di notifiche al giorno
 * I tempi di consegna sono, normalmente, limitati a pochissimi secondi.
 
@@ -129,7 +129,7 @@ Per migliorare disponibilità e affidabilità si è scelto di usare un message b
 * Open Source, documentazione ben fatta ed esempi semplici da trovare
 
 ### Node.js
-Occorre un prodotto che consenta di implemente le funzionalità del sistema.
+Occorre un prodotto che consenta di implementare le funzionalità del sistema.
 La scelta è ricaduta su node.js per i seguenti motivi:
 * Runtime leggero
 * Open Source, documentazione ben fatta ed esempi semplici da trovare
@@ -144,7 +144,7 @@ La scelta è ricaduta su node.js per i seguenti motivi:
 ### JWT
 Vi è un forte requisito di rendere il sistema sicuro e di poter tracciare le operazioni svolte dai client. La scelta sui token JWT è dovuta a:
 * Semplicità di implementazione 
-* esistono molte librerie open source che implementano lo standard.
+* Esistono molte librerie open source che implementano lo standard.
 * Salvaguarda il principio *stateless* dello stile architetturale rest 
 * E' molto flessibile in quanto può portare qualsiasi tipo di informazione.
 * Il fatto di essere firmato garantisce il fatto che sia molto difficile da falsificare
@@ -160,24 +160,24 @@ Il diagramma seguente è lo schema di deployment del sistema.
 Il sistema ha la necessità di controllare e  tracciare le attività dei client che lo usano la piattaforma di notifica. Per soddisfare questi requisiti ad ogni client è assegnato un token JWT che include le informazioni necessarie per svolgere tutte le funzioni richieste. Tale token, la cui conservazione e riservatezza sono a cura del client, è rilasciato al fruitore all'atto della sottoscrizione al servizio NOTIFY.
 
 ## Processo per il rilascio di un token al client
-Il token contiene le informazioni necessarie affinchè il sistema possa inviare le notifiche per conto del client.  Ove le informazioni fornite debbano essere cambiate, ad esempio perchè si vuole dismettere una canalità o sono cambiate le credenziali per le emai,l deve essere rilasciato un nuovo token. La prassi richiede che sia rilasciato un token differente per ogni modulo che con cui è necessario interfacciarsi. Ad esempio un client complesso potrebbe disporre di un token per inviare le notifiche, uno per usare le preferenze e uno per usare il message store.
+Il token contiene le informazioni necessarie affinchè il sistema possa inviare le notifiche per conto del client.  Ove le informazioni fornite debbano essere cambiate, ad esempio perchè si vuole dismettere una canalità o sono cambiate le credenziali per le email, deve essere rilasciato un nuovo token. La prassi richiede che sia rilasciato un token differente per ogni modulo con cui è necessario interfacciarsi. Ad esempio un client complesso potrebbe disporre di un token per inviare le notifiche, uno per usare le preferenze e uno per usare il message store.
 
 ## Registrazione del servizio di business
   Il servizio di business in fase di registrazione deve fornire le seguenti informazioni:                                                                                                                                               
 
 | **nome**              | **descrizione**                                                                                                                                                                                                                                                                                               |
 |-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| service name          | identificativo univoco del servizio ( se disponibile utilizzare un identificativo già presente nell'ecosistema di riferimento)                                                                                                                                                                                                                                               |
-| reference_email       | email di contatto del capo progetto del servizio, questa informazione verrà utilizzata esclusivamente per l'invio di token di accesso o altre informazioni di servizio.                                                                                                                                                                                                                                                                  |
-| tags                  | attributi del servizio utili come filtri in fase presentazione all'utente dei servizi di notifica. Consigliato un confronto con il gruppo di Governo per l'attribuzione dei tags al servizio                                                                                                                                                                                                                                             |
-| canalità offerte  | Specificare le canalità offerte dal servizio di business: email, sms, push.<br>N.B.:<br>  Nel caso di **push** è necessario esplicitare la chiave token di FireBase legata all'applicazione web che riceve le notifiche. Da richiedere al progettista responsabile dello sviluppo del front-end.<br> Nel caso di **sms** è necessario indicare gli estremi del progetto SMS<br>  Nel caso di **email** è necessario indicare una mail mittente valida e registrata presso il proprio provider.|                                                                                                                                                                                                               |
+| service name          | identificativo univoco del servizio ( se disponibile utilizzare un identificativo già presente nell'ecosistema di riferimento).|
+| reference_email       | email di contatto del capo progetto del servizio, questa informazione verrà utilizzata esclusivamente per l'invio di token di accesso o altre informazioni di servizio.|
+| tags                  | attributi del servizio utili come filtri in fase presentazione all'utente dei servizi di notifica. Consigliato un confronto con il gruppo di Governo per l'attribuzione dei tags al servizio|
+| canalità offerte  | Specificare le canalità offerte dal servizio di business: email, sms, push e app io.<br>N.B.:<br>  Nel caso di **push** è necessario esplicitare la chiave token di FireBase legata all'applicazione web che riceve le notifiche. Da richiedere al progettista responsabile dello sviluppo del front-end.<br> Nel caso di **sms** è necessario indicare gli estremi del progetto SMS.<br>  Nel caso di **email** è necessario indicare una mail mittente valida e registrata presso il proprio provider. <br> Nel caso di **io** è necessario fornire l'api key del servizio creato sulla piattaforma IO Italia.|
 
 Ad ogni servizio di business è associata una chiave JWT di accesso alle API di sottomissione notifiche e le chiavi JWT dei canalità di front-end responsabili del setting delle preferenze utente e consultazione messaggi.
   
 # Getting started submit notifiche
 Il sistema di notifica si basa su un message broker che indirizza ai vari canali le notifiche.
 Per contattare il *Message Broker* è necessario disporre di un token di autorizzazione rilasciato durante il processo di accreditamento al notificatore ed associato al singolo servizio di business. 
-Ogni richiesta inviata deve avere l'header ```x-authentication```  valorizzato con il token.
+Ogni richiesta inviata deve avere l'header `x-authentication`  valorizzato con il token.
 
 Parte integrante della piattaforma di notifica e la componente  *Preferences* che detiene i contatti digitali dell'utente e preferenze per singolo servizio. Il comportamento di default del notificatore prevede che il messaggio venga recapitato al cittadino rispettando le preferenze dell'utente stesso. Se l'utente **non ha attivato le preferenze**, il sistema di business può inviare un messaggio all'utente esplicitando il contatto digitale nel messaggio stesso.
 
@@ -185,7 +185,7 @@ Il sistema di business ha inoltre la facoltà di invertire il comportamento di d
 
 La piattaforma di notifica NOTIFY è in grado di veicolare un messaggio di notifica alla piattaforma dell'amministrazione centrale IO Italia, affinché un messaggio possa essere recapitato ad IO Italia è necessario che l'utente destinatario del messaggio si sia accreditato al sistema centrale e che non abbia negato la ricezione delle notifiche per lo specifico servizio.
 
-Il sistema gestisce una semplice forma di priorità. Essa consiste dare la precedenza ai messaggi con l'attributo ```priority``` impostato al valore "high". I messaggi a medesima priorità sono comunque serviti secondo la politica FIFO. 
+Il sistema gestisce una semplice forma di priorità. Essa consiste dare la precedenza ai messaggi con l'attributo `priority` impostato al valore "high". I messaggi a medesima priorità sono comunque serviti secondo la politica FIFO. 
 
 
 ## Descrizione campi messaggi di notifica
@@ -195,7 +195,7 @@ Il sistema gestisce una semplice forma di priorità. Essa consiste dare la prece
 * ```priority```: se valorizzato con ```high``` (stringa)  il messaggio sarà gestito dalle code con un tasso di consegna il più elevato possibile, trattandosi di notifiche di cortesia non sono previsti tempi minima di consegna.   
 * ```payload```: contiene il payload del messaggio. Nel caso particolare dell'invio delle notifiche contiene principalmente le informazioni per le notifiche sui vari canali.
    * ```payload.id```: id della notifica da inviare.  E' una stringa in formato UUIDv4 è responsabilità del client che sottomette la notifica generare la chiave. Identifica la notifica e sarà usato per memorizzare il messaggio nel *Message Store* come comunicazione disponibile sul portale di accesso dell'utente.
-   * ```payload.bulk_id```: uuid che rappresenta un bulk(collezione) di messaggi
+   * ```payload.bulk_id```: uuid che rappresenta un bulk (collezione) di messaggi
    * ```payload.correlation_id```: uuid di un messaggio correlato
    * ```payload.user_id```: user_id del destinatario. E' una stringa (spesso il codice fiscale) che identifica l'utente a cui inviare la notifica. E' usato per consultare il sistema *Preferences* per ricavare i contatti digitali.  
    * ```payload.tag```: elenco dei tags associati alla comunicazione, l'elenco dei tag ammissibili è governato dall'ecosistema dell'ente.     
@@ -206,14 +206,15 @@ Il sistema gestisce una semplice forma di priorità. Essa consiste dare la prece
          * ```payload.push.call_to_action```: stringa che sarà interpretata dal client per indirizzare l'esecuzione a fronte dell'interazione dell'utente con la notifica visualizzata sul dispositivo. Tipicamente è l'uri di una pagina dell'applicazione dell'utente (app PWA, portale web).
    * ```payload.sms```: Sezione dedicata alla notifica via SMS. Contiene le informazioni necessarie per inviare l'SMS tramite il gateway SMS.
       * ```payload.sms.phone```: RISERVATO PER L'UTILIZZO IN LEGACY O TRUSTED. Stringa contente il numero di telefono del destinatario.
-      * ```payload.sms.content```: E' il contenuto del messaggio SMS da inviare all'utente, il numero massimo di caratteri ammessi è 159. Il testo deve matchare la regex: ```/^[a-zA-Z0-9àèìòùÀÈÌÒÙáéíóúÁÉÍÓÚ"!\s()=?'+*@$%,.;:#_\->/]*$/g```
-              Ci sono delle eccezioni riguardo il conteggio dei caratteri.
-              1) Il carattere “:” viene conteggiato due volte quando è seguito da un altro carattere “:”, oppure quando è
-					seguito da due cifre esadecimali. Alcuni esempi:
-					“Ore 16:30” (vengono contati 10 caratteri, e non 9)
-					“Colore::rosso Altezza::150cm” (vengono contati 31 caratteri e non 28)
-					“Sede museo: piazza Carignano” (vengono contati 28 caratteri, quanti ne contiene il testo,
-					in quanto il carattere “:” non è seguito da altri caratteri “:” o da coppia di cifre esadecimali)
+      * ```payload.sms.content```: E' il contenuto del messaggio SMS da inviare all'utente, il numero massimo di caratteri ammessi è 159. Il testo deve matchare la regex: <br>
+	  ```/^[a-zA-Z0-9àèìòùÀÈÌÒÙáéíóúÁÉÍÓÚ"!\s()=?'+*@$%,.;:#_\->/]*$/g```
+              <br>
+			  Ci sono delle eccezioni riguardo il conteggio dei caratteri.<br>
+              1) Il carattere “:” viene conteggiato due volte quando è seguito da un altro carattere “:”, oppure quando è seguito da due cifre esadecimali.<br>
+			  Alcuni esempi:<br>
+					“Ore 16:30” (vengono contati 10 caratteri, e non 9)<br>
+					“Colore::rosso Altezza::150cm” (vengono contati 31 caratteri e non 28)<br>
+					“Sede museo: piazza Carignano” (vengono contati 28 caratteri, quanti ne contiene il testo, in quanto il carattere “:” non è seguito da altri caratteri “:” o da coppia di cifre esadecimali)<br>
 			2) Tutti i caratteri accentati contano come due caratteri. Per esempio:
 			“perché andrò” (per il Gateway SMS ha una lunghezza pari a 14 invece che 12 caratteri)
    * ```payload.email```:  Sezione dedicata alla notifica via email. Contiene le informazioni necessarie per inviare una email tramite la mailfarm.
@@ -226,16 +227,16 @@ Il sistema gestisce una semplice forma di priorità. Essa consiste dare la prece
       * ```payload.mex.body```: La stringa che rappresenta il contenuto della comunicazione
       * ```payload.mex.call_to_action```: stringa che sarà interpretata dal client per indirizzare l'esecuzione a fronte dell'interazione dell'utente con la comunicazione. Tipicamente è l'uri di una pagina dell'applicazione dell'utente (app PWA, portale web).
     * ```payload.io```: informazione utili per l'invio di notifiche al progetto IO Italia (https://io.italia.it/), per la formattazione del dell'oggetto fare riferimento a: https://dev-portal-prod.azurewebsites.net/openapi.html
-    * ```payload.io.time_to_live```: Default:3600. Specifica quanto tempo(in secondi) il messaggio vivrà nel sistema di io prima che venga scartato perché scaduto.
-    * ```payload.io.content```: contenuto della notifica (required)
-	    * ```payload.io.content.subject```: Il soggetto del messaggio (10-120 caratteri)
-	    * ```payload.io.content.markdown```: il test del messaggio in markdown (80-10000)
-	    * ```payload.io.content.payment_data```:  parte opzionale che indica la sezione per il pagamento PagoPA
-			* ```payload.io.content.payment_data.amount```:  Quantità espressa in centesimi di euro (1-999999999)
-		    * ```payload.io.payment_data.notice_number```: il campo "numero_avviso" di PagoPA. (```^[0123][0-9]{17}$```)
-		* ```payload.io.content.due_date```:  ISO-8601 format and UTC timezone. (i.e. 2019-05-29T20:00:00)
-	* ```payload.io.default_addresses```: Indirizzi di default nel caso l'utente non l'abbia settati 
-		* ```payload.io.default_addresses.email```: email addresses 
+   		* ```payload.io.time_to_live```: Default:3600. Specifica quanto tempo(in secondi) il messaggio vivrà nel sistema di io prima che venga scartato perché scaduto.
+		* ```payload.io.content```: contenuto della notifica (required)
+			* ```payload.io.content.subject```: Il soggetto del messaggio (10-120 caratteri)
+			* ```payload.io.content.markdown```: il test del messaggio in markdown (80-10000)
+			* ```payload.io.content.payment_data```:  parte opzionale che indica la sezione per il pagamento PagoPA
+				* ```payload.io.content.payment_data.amount```:  Quantità espressa in centesimi di euro (1-999999999)
+				* ```payload.io.payment_data.notice_number```: il campo "numero_avviso" di PagoPA. (```^[0123][0-9]{17}$```)
+			* ```payload.io.content.due_date```:  ISO-8601 format and UTC timezone. (i.e. 2019-05-29T20:00:00)
+		* ```payload.io.default_addresses```: Indirizzi di default nel caso l'utente non l'abbia settati 
+			* ```payload.io.default_addresses.email```: email addresses 
    * ```payload.memo```:  sezione dedicata alla generazione di eventi Calendario in formato .ics Standard	RFC 5545
 	  * ```payload.memo.start```: data inizio evento(ISO 8601) (i.e 2019-05-02T14:00:00), se è un evento allDay aggiungere anche il timezone "Z" successivamente (i.e. 2019-05-02T00:00:00Z)
 	  * ```payload.memo.end```: data fine evento(ISO 8601) (i.e 2019-05-02T14:00:00)
@@ -251,8 +252,7 @@ Il sistema gestisce una semplice forma di priorità. Essa consiste dare la prece
 Per inviare una singola notifica ad un utente occorre usare il servizio di submit del *Message Broker*.
 L'api da usare è situata all'endpoint ```/api/v1/topics/messages```. Usando il verbo **POST**  occorre inviare un body che contiene il messaggio con il payload che consiste nella notifica da inviare. 
 #### Esempio di request per l'invio di una singola notifica in ambiente di TEST
-L' endpoint con di test per sottomettere un messaggio è: 
-https://<notify-server>/notify-mb/api/v1/topics/messages
+L' endpoint di test per sottomettere un messaggio è: https://\<notify-server:notify-port\>/api/v1/topics/messages
 
 ```  
 {
@@ -263,9 +263,9 @@ https://<notify-server>/notify-mb/api/v1/topics/messages
         "user_id": "PPPPLT80R10M082K",
 	  	"tag": "appuntamenti,urgente,c_l219",
 	  	"push": {
-					"title":"conferma appuntamento anagrafe",
-					"body":"Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe",
-					"call_to_action":"https://servizi.torinofacile.it/cgi-bin/accesso/base/index.cgi?cod_servizio=SPOT&realm=torinofacile"
+			"title":"conferma appuntamento anagrafe",
+			"body":"Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe",
+			"call_to_action":"https://servizi.torinofacile.it/cgi-bin/accesso/base/index.cgi?cod_servizio=SPOT&realm=torinofacile"
 		},
 		"email": {
 			"subject":"conferma appuntamento anagrafe",
@@ -304,7 +304,7 @@ https://<notify-server>/notify-mb/api/v1/topics/messages
 **call** 
 ```
 curl -X POST \
-           https://<notify-server>/notify-mb/api/v1/topics/messages \
+           https://<notify-server:notify-port>/api/v1/topics/messages \
            -H 'Content-Type: application/json' \
            -H 'x-authentication: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiNGRlZjJkYzUtOGM1Ny00NDE5LTg1MGYtOTg4ZjhkN2QzNWQwIiwiY2xpZW50X25hbWUiOiJhcHByZWZlcnRpIiwiY2xpZW50X3V1aWQiOiIxYzIzZmUxYy0xMDhkLTQxOTQtOWM3OS1hNTU1NjVjMDYxMTYiLCJwcmVmZXJlbmNlX3NlcnZpY2VfbmFtZSI6InJvbF9udW92b19yZWZlcnRvIiwiZXhwIjoyNTM0MDIyMTA4MDAwMDAsImlhdCI6MTUxOTgyMjcwNDQzOCwiYXBwbGljYXRpb25zIjpbIm5vdGlmeSIsIm1leCIsInByZWZlcmVuY2VzIl0sInBlcm1pc3Npb25zIjpbInVzZXIiLCJhZG1pbiIsImJhY2tlbmQiXSwicHJlZmVyZW5jZXMiOnsicHVzaCI6IkFBQUFXbXhjZnpZOkFQQTkxYkhJVVo3OFJCVEhhSi1pS05PeldRdy15ODhJVDVJenhQMDFHRXd6a0VaVlV6MDNNYWstMkNIdkpXUWRDYXREeWpNVGFkSHNQS1VhMGV3ekowc2YxVEFURkFIV3h3S1o0c2FhWF8wWDhzNUdVSE0wbm1QbS0xV0tyLVdCX041Y2IySFZrVElqIiwiZW1haWwiOiJhcHByZWZlcnRvQGFzZC5jb20iLCJtZXgiOiJhc2RhZCIsInNtcyI6eyJ1c2VybmFtZSI6Im5vdGlmeSIsInBhc3N3b3JkIjoibWVnYWxvbWFuXzE4IiwicHJvamVjdF9jb2RlIjoiMzcifX19.H9Fs0IVGwK9E16F3R3cVcc-ULWw5WjTcPBgiUPGsoMU' \
            -d '{
@@ -314,9 +314,9 @@ curl -X POST \
 				"user_id": "PPPPLT80R10M082K",
 				"tag": "appuntamenti,urgente,c_l219",
 				"push": {
-							"title":"conferma appuntamento anagrafe",
-							"body":"Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe",
-							"call_to_action":"https://servizi.torinofacile.it/cgi-bin/accesso/base/index.cgi?cod_servizio=SPOT&realm=torinofacile"
+					"title":"conferma appuntamento anagrafe",
+					"body":"Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe",
+					"call_to_action":"https://servizi.torinofacile.it/cgi-bin/accesso/base/index.cgi?cod_servizio=SPOT&realm=torinofacile"
 				},
 				"email": {
 					"subject":"conferma appuntamento anagrafe",
@@ -361,9 +361,9 @@ Far riferimento alle specifiche YAML per l'elenco dei codici di errori HTTP prev
 
 ### Invio di un gruppo di notifiche (modalità Bulk)
   
-La piattaforma NOTIFY permette la sottomissione di un gruppo di notifiche mediante il richiamo di un servizio API Rest della componente *Message Broker*.
+La piattaforma NOTIFY permette la sottomissione di un gruppo di notifiche mediante il richiamo di un servizio API REST della componente *Message Broker*.
 L'api da usare è situata all'endpoint ```/api/v1/topics/messages```. Usando il verbo **POST**  occorre inviare un body che contiene un array di messaggi ognuno dei quali con il payload che consiste nella notifica da inviare.
-La dimensione massima del payload sottomesso via API Rest è di 20 MByte, oltre questa dimensione il messaggio non viene preso in carico dal Message Broker. E' possibile suddividere gruppi di notifiche di dimensioni maggiori di 20 MByte in più chiamate, ciascuna con una payload massimo di 20 MByte, oltre questa dimensione il bulk sarà rifiutato dal sistema.
+La dimensione massima del payload sottomesso via API è di 20 MByte, oltre questa dimensione il messaggio non viene preso in carico dal Message Broker. E' possibile suddividere gruppi di notifiche di dimensioni maggiori di 20 MByte in più chiamate, ciascuna con una payload massimo di 20 MByte, oltre questa dimensione il bulk sarà rifiutato dal sistema.
 
 #### Esempio di request per invio a gruppi di notifiche
 Qui sotto una request che invia una notifica ad ognuno dei tre utenti. I contenuti sono personalizzati per ogni utente. La request è un array di messaggi che hanno esattamente lo stesso formato del caso in cui si invii una singolo messaggio.
@@ -371,50 +371,50 @@ Si aggiunge il campo ```bulk_id ``` che identifica il gruppo di appartenenza del
 
 ```  
 [
-	{
-	"uuid": "db2b5681-87af-4bff-95ed-b1b22f4c2f2d",
-	"expire_at": "2019-04-23T20:00:00",
-	"bulk_id": "fbede27f-3dc1-4b73-8d8a-c452b8f377ec",
-    "payload": {
-		"id": "db2b5681-87af-4bff-95ed-b1b22f4c2f2d",
-        "user_id": "PPPPLT80R10M082K",
-	  	"tag": "appuntamenti,urgente,c_l219",
-	  	"push": {
-					"title":"conferma appuntamento anagrafe",
-					"body":"Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe",
-					"call_to_action":"https://servizi.torinofacile.it/cgi-bin/accesso/base/index.cgi?cod_servizio=SPOT&realm=torinofacile"
-		},
-		"email": {
-			"subject":"conferma appuntamento anagrafe",
-			"body":"Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe per il 24 Aprile 2019 ore 09:00",
-			"template_id":"template-spff.html"
-		},
-		"sms": {
-			"content":"Ricorda l'appuntamento presso l'anagrafe di Torino per il 24 Aprile 2019 ore 09:00. per maggiori info www.torinofacile.it"
-		},
-		"mex": {
-			"title": "conferma appuntamento anagrafe",
-			"body" : "Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe per il 24 Aprile 2019 ore 09:00",
-			"call_to_action": "https://servizi.torinofacile.it/cgi-bin/accesso/base/index.cgi?cod_servizio=SPOT&realm=torinofacile"
-		},
-        "io": {
-            "time_to_live": 3600,
-            "content": {
-                "subject": "conferma appuntamento anagrafe",
-                "markdown": "# memo appuntamento## presso ufficio Anagrafe di Città di TorinoTi ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe per il 24 Aprile 2019 ore 09:00",
-	            "due_date": "2019-04-24T00:00:00"
-            }
-        },
-	    "memo":{
-	    	"start": "2019-04-24 09:00:00",
-	        "end": "2019-04-24 09:45:00",
-	        "summary": "appuntamento Anagrafe Città di Torino",
-	        "description": "Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe",
-	        "location": "Via della Consolata, 23, 10122 Torino",
-	        "organizer": "Organizzatore Evento <noreply@evento.it>"
-	    }
-	}
-},
+		{
+		"uuid": "db2b5681-87af-4bff-95ed-b1b22f4c2f2d",
+		"expire_at": "2019-04-23T20:00:00",
+		"bulk_id": "fbede27f-3dc1-4b73-8d8a-c452b8f377ec",
+		"payload": {
+			"id": "db2b5681-87af-4bff-95ed-b1b22f4c2f2d",
+			"user_id": "PPPPLT80R10M082K",
+			"tag": "appuntamenti,urgente,c_l219",
+			"push": {
+				"title":"conferma appuntamento anagrafe",
+				"body":"Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe",
+				"call_to_action":"https://servizi.torinofacile.it/cgi-bin/accesso/base/index.cgi?cod_servizio=SPOT&realm=torinofacile"
+			},
+			"email": {
+				"subject":"conferma appuntamento anagrafe",
+				"body":"Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe per il 24 Aprile 2019 ore 09:00",
+				"template_id":"template-spff.html"
+			},
+			"sms": {
+				"content":"Ricorda l'appuntamento presso l'anagrafe di Torino per il 24 Aprile 2019 ore 09:00. per maggiori info www.torinofacile.it"
+			},
+			"mex": {
+				"title": "conferma appuntamento anagrafe",
+				"body" : "Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe per il 24 Aprile 2019 ore 09:00",
+				"call_to_action": "https://servizi.torinofacile.it/cgi-bin/accesso/base/index.cgi?cod_servizio=SPOT&realm=torinofacile"
+			},
+			"io": {
+				"time_to_live": 3600,
+				"content": {
+					"subject": "conferma appuntamento anagrafe",
+					"markdown": "# memo appuntamento## presso ufficio Anagrafe di Città di TorinoTi ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe per il 24 Aprile 2019 ore 09:00",
+					"due_date": "2019-04-24T00:00:00"
+				}
+			},
+			"memo":{
+				"start": "2019-04-24 09:00:00",
+				"end": "2019-04-24 09:45:00",
+				"summary": "appuntamento Anagrafe Città di Torino",
+				"description": "Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe",
+				"location": "Via della Consolata, 23, 10122 Torino",
+				"organizer": "Organizzatore Evento <noreply@evento.it>"
+			}
+		}
+	},
 	{
 		"uuid": "d7255707-dd47-4d49-8189-f795a2c1a542",
 	    "payload": {
@@ -422,9 +422,9 @@ Si aggiunge il campo ```bulk_id ``` che identifica il gruppo di appartenenza del
 			"bulk_id":"fbede27f-3dc1-4b73-8d8a-c452b8f377ec",
 	        "user_id": "CNZCNE92R10R082Z",
 		  	"push": {
-						"title":"Titolo push 2",
-						"body":" corpo push 2",
-						"call_to_action":"https://servizi.torinofacile.it/cgi-bin/accesso/base/index.cgi?cod_servizio=SPOT&realm=torinofacile"
+				"title":"Titolo push 2",
+				"body":" corpo push 2",
+				"call_to_action":"https://servizi.torinofacile.it/cgi-bin/accesso/base/index.cgi?cod_servizio=SPOT&realm=torinofacile"
 			},
 			"email": {
 				"subject":"subject email 2",
@@ -442,51 +442,52 @@ Si aggiunge il campo ```bulk_id ``` che identifica il gruppo di appartenenza del
 		}
 	},
 	{
-	"uuid": "b04581a8-6a39-4b86-99f9-336940a60ebf",
-	"expire_at": "2019-04-23T20:00:00",
-    "payload": {
-		"id": "b04581a8-6a39-4b86-99f9-336940a60ebf",
-		"bulk_id":"fbede27f-3dc1-4b73-8d8a-c452b8f377ec",
-        "user_id": "TTTSRN81R10M082G",
-	  	"tag": "appuntamenti,urgente,c_l219",
-	  	"push": {
-					"title":"conferma appuntamento anagrafe",
-					"body":"Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe",
-					"call_to_action":"https://servizi.torinofacile.it/cgi-bin/accesso/base/index.cgi?cod_servizio=SPOT&realm=torinofacile"
-		},
-		"email": {
-			"subject":"conferma appuntamento anagrafe",
-			"body":"Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe per il 24 Aprile 2019 ore 09:00",
-			"template_id":"template-spff.html"
-		},
-		"sms": {
-			"content":"Ricorda l'appuntamento presso l'anagrafe di Torino per il 24 Aprile 2019 ore 09:00. per maggiori info www.torinofacile.it"
-		},
-		"mex": {
-			"title": "conferma appuntamento anagrafe",
-			"body" : "Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe per il 24 Aprile 2019 ore 09:00",
-			"call_to_action": "https://servizi.torinofacile.it/cgi-bin/accesso/base/index.cgi?cod_servizio=SPOT&realm=torinofacile"
-		},
-        "io": {
-            "time_to_live": 3600,
-            "content": {
-                "subject": "conferma appuntamento anagrafe",
-                "markdown": "# memo appuntamento## presso ufficio Anagrafe di Città di TorinoTi ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe per il 24 Aprile 2019 ore 09:00",
-	            "due_date": "2019-04-24T00:00:00"
-            }
-        },
-	    "memo":{
-	    	"start": "2019-04-24 09:00:00",
-	        "end": "2019-04-24 09:45:00",
-	        "summary": "appuntamento Anagrafe Città di Torino",
-	        "description": "Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe",
-	        "location": "Via della Consolata, 23, 10122 Torino",
-	        "organizer": "Organizzatore Evento <noreply@evento.it>"
-	    }
+		"uuid": "b04581a8-6a39-4b86-99f9-336940a60ebf",
+		"expire_at": "2019-04-23T20:00:00",
+		"payload": {
+			"id": "b04581a8-6a39-4b86-99f9-336940a60ebf",
+			"bulk_id":"fbede27f-3dc1-4b73-8d8a-c452b8f377ec",
+			"user_id": "TTTSRN81R10M082G",
+			"tag": "appuntamenti,urgente,c_l219",
+			"push": {
+				"title":"conferma appuntamento anagrafe",
+				"body":"Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe",
+				"call_to_action":"https://servizi.torinofacile.it/cgi-bin/accesso/base/index.cgi?cod_servizio=SPOT&realm=torinofacile"
+			},
+			"email": {
+				"subject":"conferma appuntamento anagrafe",
+				"body":"Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe per il 24 Aprile 2019 ore 09:00",
+				"template_id":"template-spff.html"
+			},
+			"sms": {
+				"content":"Ricorda l'appuntamento presso l'anagrafe di Torino per il 24 Aprile 2019 ore 09:00. per maggiori info www.torinofacile.it"
+			},
+			"mex": {
+				"title": "conferma appuntamento anagrafe",
+				"body" : "Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe per il 24 Aprile 2019 ore 09:00",
+				"call_to_action": "https://servizi.torinofacile.it/cgi-bin/accesso/base/index.cgi?cod_servizio=SPOT&realm=torinofacile"
+			},
+			"io": {
+				"time_to_live": 3600,
+				"content": {
+					"subject": "conferma appuntamento anagrafe",
+					"markdown": "# memo appuntamento## presso ufficio Anagrafe di Città di TorinoTi ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe per il 24 Aprile 2019 ore 09:00",
+					"due_date": "2019-04-24T00:00:00"
+				}
+			},
+			"memo":{
+				"start": "2019-04-24 09:00:00",
+				"end": "2019-04-24 09:45:00",
+				"summary": "appuntamento Anagrafe Città di Torino",
+				"description": "Ti ricordiamo l'appuntamento prenotato presso l'ufficio anagrafe",
+				"location": "Via della Consolata, 23, 10122 Torino",
+				"organizer": "Organizzatore Evento <noreply@evento.it>"
+			}
+		}
 	}
-}
 ]
- ```  
+ ```
+
 ### Invio di notifica trusted
 Per inviare una singola notifica trusted (ovvero per fare in modo che il sistema non si appoggi a *Preferenze*) ad un utente occorre usare il servizio di submit del *Message Broker*.
 L'api da usare è situata all'endpoint ```/api/v1/topics/messages```. Usando il verbo **POST**  occorre inviare un body che contiene il messaggio con il payload che consiste nella notifica da inviare. In questo caso occorre aggiungere un campo ```trusted``` valorizzato con ```true```.
@@ -563,11 +564,11 @@ Ad esempio invocando con **PUT** ```/api/v1/users/MNVPNT77S11L219F/contacts``` c
     "sms": "0039333312412",
     "email": "mario.rossi@email.com",
     "push": {
-              "prof_citt":
-                  ["dkMBmrbsNZg:APA91bHfP22izgJnhfjjmfIW8qa8Fe0BRekZ-W9i4ztiNdmYHQhc4K9htgRQu8PZSI7JiM5RnV4QGxuZLSUsxeJWhKqj77guPwhgnQJM2QKMutO9RgUxucpXBsfthAh4QrLX2X5yNRnb",
-                  "dkMBmrbsNZg:APA91bHfP22izgJnhfjjmfIW8qa8Fe0BRekZ-W9i4ztiNdmYHQhc4K9htgRQu8PZSI7JiM5RnV4QGxuZLSUsxeJWhKqj77guPwhgnQJM2QKMutO9RgUxucpXBsfthAh4QrLX2X5yN333"
-                  ]
-    } ,
+		"prof_citt": [
+			"dkMBmrbsNZg:APA91bHfP22izgJnhfjjmfIW8qa8Fe0BRekZ-W9i4ztiNdmYHQhc4K9htgRQu8PZSI7JiM5RnV4QGxuZLSUsxeJWhKqj77guPwhgnQJM2QKMutO9RgUxucpXBsfthAh4QrLX2X5yNRnb",
+			"dkMBmrbsNZg:APA91bHfP22izgJnhfjjmfIW8qa8Fe0BRekZ-W9i4ztiNdmYHQhc4K9htgRQu8PZSI7JiM5RnV4QGxuZLSUsxeJWhKqj77guPwhgnQJM2QKMutO9RgUxucpXBsfthAh4QrLX2X5yN333"
+		]
+    }
 }
 ```
 Si salveranno i nuovi contatti digitali.
@@ -631,7 +632,7 @@ Si può effettuare una ricerca utilizzando l'uuid del messaggio o il bulk_id.
 
 Di seguito un esempio di chiamate con id e uno con bulk_id con relativa response:
 
-GET /api/v1/status/messages/bd17035f-7d13-4997-99aa-ec60c9c0f4e0
+**GET** `/api/v1/status/messages/bd17035f-7d13-4997-99aa-ec60c9c0f4e0`
 
 response:
 
@@ -647,7 +648,7 @@ response:
 }
 ```
 
-GET /api/v1/status/messages?bulk_id=ad53a827-88ed-42b2-aafd-b69eedd754b8
+**GET** `/api/v1/status/messages?bulk_id=ad53a827-88ed-42b2-aafd-b69eedd754b8`
 
 response:
 
@@ -674,7 +675,7 @@ response:
 ]
 ```
 
-Il valore 1 sulla canalità (sms_result , io_result,....) indica che il messaggio è stato correttamente inoltrato.
+Il valore 1 sulla canalità (sms_result, io_result, ...) indica che il messaggio è stato correttamente inoltrato.
 
 ## Versioning
 
@@ -687,7 +688,8 @@ Gli autori sono indicati nei file README.md dei singoli componenti.
 ## License
 
 SPDX-License-Identifier: EUPL-1.2
-See the LICENSE.txt file for details
+
+Vedere il file LICENSE per maggiori dettagli.
 
 ## Copyrights
 
