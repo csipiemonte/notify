@@ -22,6 +22,7 @@ Il prodotto si articola nelle seguenti componenti:
 * Message consumer (https://github.com/csipiemonte/notify-mexconsumer)
 * Gestore delle preferenze (https://github.com/csipiemonte/notify-preferences)
 * Notifiche push consumer (https://github.com/csipiemonte/notify-pushconsumer)
+* Portale di amministrazione (https://github.com/csipiemonte/notify-unpadmin)
 
 
 ## Disegno architetturale
@@ -173,6 +174,8 @@ Il token contiene le informazioni necessarie affinchè il sistema possa inviare 
 | canalità offerte  | Specificare le canalità offerte dal servizio di business: email, sms, push e app io.<br>N.B.:<br>  Nel caso di **push** è necessario esplicitare la chiave token di FireBase legata all'applicazione web che riceve le notifiche. Da richiedere al progettista responsabile dello sviluppo del front-end.<br> Nel caso di **sms** è necessario indicare gli estremi del progetto SMS.<br>  Nel caso di **email** è necessario indicare una mail mittente valida e registrata presso il proprio provider. <br> Nel caso di **io** è necessario fornire l'api key del servizio creato sulla piattaforma IO Italia.|
 
 Ad ogni servizio di business è associata una chiave JWT di accesso alle API di sottomissione notifiche e le chiavi JWT dei canalità di front-end responsabili del setting delle preferenze utente e consultazione messaggi.
+
+I servizi si possono creare tramite la web app *unpadmin* che offre interfaccie semplificate per la raccolta delle informazioni e per la generazione dei token JWT per l'utilizzo del API della piattaforma.
   
 # Getting started submit notifiche
 Il sistema di notifica si basa su un message broker che indirizza ai vari canali le notifiche.
