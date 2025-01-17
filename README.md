@@ -206,7 +206,7 @@ Il sistema gestisce una semplice forma di priorità. Essa consiste dare la prece
         *  ```payload.push.token```: RISERVATO PER L'UTILIZZO IN LEGACY O TRUSTED. Un array di stringhe che rappresentano i token utenti.
         *  ```payload.push.title```: contiene la stringa che sarà visualizzata come titolo della notifica.
          * ```payload.push.body```: contiene la stringa che sarà visualizzata come corpo della notifica.
-         * ```payload.push.call_to_action```: stringa che sarà interpretata dal client per indirizzare l'esecuzione a fronte dell'interazione dell'utente con la notifica visualizzata sul dispositivo. Tipicamente è l'uri di una pagina dell'applicazione dell'utente (app PWA, portale web).
+        * ```payload.push.call_to_action```: stringa che sarà interpretata dal client per indirizzare l'esecuzione a fronte dell'interazione dell'utente con la notifica visualizzata sul dispositivo. Tipicamente è l'uri di una pagina dell'applicazione dell'utente (app PWA, portale web).
    * ```payload.sms```: Sezione dedicata alla notifica via SMS. Contiene le informazioni necessarie per inviare l'SMS tramite il gateway SMS.
       * ```payload.sms.phone```: RISERVATO PER L'UTILIZZO IN LEGACY O TRUSTED. Stringa contente il numero di telefono del destinatario.
       * ```payload.sms.content```: E' il contenuto del messaggio SMS da inviare all'utente, il numero massimo di caratteri ammessi è 159. Il testo deve matchare la regex: <br>
@@ -236,7 +236,7 @@ Il sistema gestisce una semplice forma di priorità. Essa consiste dare la prece
 			* ```payload.io.content.markdown```: il test del messaggio in markdown (80-10000)
 			* ```payload.io.content.payment_data```:  parte opzionale che indica la sezione per il pagamento PagoPA
 				* ```payload.io.content.payment_data.amount```:  Quantità espressa in centesimi di euro (1-999999999)
-				* ```payload.io.payment_data.notice_number```: il campo "numero_avviso" di PagoPA. (```^[0123][0-9]{17}$```)
+				* ```payload.io.content.payment_data.notice_number```: il campo "numero_avviso" di PagoPA. (```^[0123][0-9]{17}$```)
 			* ```payload.io.content.due_date```:  ISO-8601 format and UTC timezone. (i.e. 2019-05-29T20:00:00)
 		* ```payload.io.default_addresses```: Indirizzi di default nel caso l'utente non l'abbia settati 
 			* ```payload.io.default_addresses.email```: email addresses 

@@ -13,8 +13,8 @@ dependsOn:
     - name: Node.js
       optional: false
       version: ''
-      versionMax: 12.18.3
-      versionMin: 10.4.1
+      versionMax: 22.x
+      versionMin: 20.x
     - name: PostgreSQL
       optional: false
       version: ''
