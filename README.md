@@ -377,9 +377,9 @@ Si aggiunge il campo ```bulk_id ``` che identifica il gruppo di appartenenza del
 		{
 		"uuid": "db2b5681-87af-4bff-95ed-b1b22f4c2f2d",
 		"expire_at": "2019-04-23T20:00:00",
-		"bulk_id": "fbede27f-3dc1-4b73-8d8a-c452b8f377ec",
 		"payload": {
 			"id": "db2b5681-87af-4bff-95ed-b1b22f4c2f2d",
+            "bulk_id": "fbede27f-3dc1-4b73-8d8a-c452b8f377ec",
 			"user_id": "PPPPLT80R10M082K",
 			"tag": "appuntamenti,urgente,c_l219",
 			"push": {
